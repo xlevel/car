@@ -3,39 +3,72 @@ import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BOARD)
 
+STEERLEFT = 11
+STEERRIGHT = 13
+
 #Configure Steering
-GPIO.setup(11, GPIO.OUT)
-GPIO.setup(13, GPIO.OUT)
+GPIO.setup(STEERLEFT, GPIO.OUT)
+GPIO.setup(STEERRIGHT, GPIO.OUT)
 
 #Configure Drive Wheels
-GPIO.setup(16, GPIO.OUT)
-GPIO.setup(18, GPIO.OUT)
+GPIO.setup(DRIVEFORWARD, GPIO.OUT)
+GPIO.setup(DRIVEBACK, GPIO.OUT)
+
+#Configure the Speed
+GPIO.setup(SPEEDCONTROL, GPIO.OUT)
 
 #Test the Steering wheels
-GPIO.output(11, True)
+GPIO.output(STEERLEFT, True)
 time.sleep(1)
 
-GPIO.output(11, False)
+GPIO.output(STEERLEFT, False)
 time.sleep(1)
 
-GPIO.output(13, True)
+GPIO.output(STEERRIGHT, True)
 time.sleep(1)
 
-GPIO.output(13, False)
+GPIO.output(STEERRIGHT, False)
 time.sleep(1)
 
 #Test the drive wheels
-GPIO.output(16, True)
+GPIO.output(SPEEDCONTROL, True)
+
+GPIO.output(DRIVEFORWARD, True)
 time.sleep(1)
 
-GPIO.output(16, False)
+GPIO.output(DRIVEFORWARD, False)
 time.sleep(1)
 
-GPIO.output(18, True)
+GPIO.output(DRIVEBACK, True)
 time.sleep(1)
 
-GPIO.output(18, False)
+GPIO.output(DRIVEBACK, False)
 time.sleep(1)
+
+GPIO.output(SPEEDCONTROL, False)
+
+
+#Test the drive speed
+pwm = GPIO.PWM(SPEEDCONTROL, 50)
+pwm.start(90)
+
+GPIO.output(DRIVEBACK, True)
+time.sleep(1)
+
+pwm.ChangeDutyCycle(50)
+time.sleep(1)
+
+pwm.ChangeDutyCycle(25)
+time.sleep(1)
+
+pwm.ChangeDutyCycle(10)
+time.sleep(1)
+
+pwm.ChangeDutyCycle(50)
+time.sleep(1)
+
+GPIO.output(DRIVEBACK, False)
+pwm.stop()
 
 
 GPIO.cleanup()
