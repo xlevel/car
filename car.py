@@ -3,8 +3,13 @@ import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BOARD)
 
-STEERLEFT = 11
-STEERRIGHT = 13
+STEERLEFT = 13
+STEERRIGHT = 11
+
+DRIVEFORWARD = 18
+DRIVEBACK = 16
+
+SPEEDCONTROL = 12
 
 #Configure Steering
 GPIO.setup(STEERLEFT, GPIO.OUT)
@@ -61,7 +66,7 @@ time.sleep(1)
 pwm.ChangeDutyCycle(25)
 time.sleep(1)
 
-pwm.ChangeDutyCycle(10)
+pwm.ChangeDutyCycle(15)
 time.sleep(1)
 
 pwm.ChangeDutyCycle(50)
