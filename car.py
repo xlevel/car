@@ -1,3 +1,107 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import time
 import RPi.GPIO as GPIO
 
@@ -52,23 +156,25 @@ def turn(direction, length):
 	GPIO.output(direction, False)
 
 
-pwm = initialise(pins, 50)
+speed = 75
 
-goForward(pwm, pins, 50)
+pwm = initialise(pins, speed)
 
-turn(pins['STEERLEFT'], 2)
+goForward(pwm, pins, speed)
 
-turn(pins['STEERRIGHT'], 2)
+turn(pins['STEERLEFT'], 1)
+
+turn(pins['STEERRIGHT'], 1)
 
 time.sleep(1)
 
 stop(pwm, pins)
 
-goBackward(pwm, pins, 50)
+goBackward(pwm, pins, speed)
 
-turn(pins['STEERRIGHT'], 2)
+turn(pins['STEERRIGHT'], 1)
 
-turn(pins['STEERLEFT'], 2)
+turn(pins['STEERLEFT'], 1)
 
 time.sleep(1)
 
